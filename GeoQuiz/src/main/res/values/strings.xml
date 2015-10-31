@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="question_text">伊斯坦布尔是土耳其最大的城市。</string>
+    <string name="true_btn_text">正确</string>
+    <string name="false_btn_text">错误</string>
+    <string name="toast_test">测试数据-%d</string>
+    <string name="correct_toast">正确</string>
+    <string name="incorrect_toast">错误</string>
+    <string name="next_btn_text">下一个</string>
+    <string-array name="questions_bank_text">
+        <item>伊斯坦布尔是土耳其最大的城市。</item>
+        <item>太平洋比大西洋大。</item>
+        <item>苏伊士运河连通红海和太平洋。</item>
+        <item>亚马逊河是美洲最长的河。</item>
+        <item>贝加尔湖是世界上最古老最深的淡水湖。</item>
+    </string-array>
+    
+    <string name="cheat_btn_text">作弊！</string>
+    <string name="warning_text">你确定要这么做吗？</string>
+    <string name="show_answer_btn_text">显示答案</string>
+    <string name="toast_judgement">作弊是不对的。</string>
+    <string name="title_activity_cheat">CheatActivity</string>
+</resources>

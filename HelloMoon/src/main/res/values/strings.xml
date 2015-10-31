@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HelloMoon</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hellomoon_play">播放</string>
+    <string name="hellomoon_stop">停止</string>
+    <string name="hellomoon_pause">暂停</string>
+    <string name="hellomoon_description">尼尔·阿姆斯特朗在月球上漫步</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

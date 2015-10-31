@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">CriminalIntent</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="crime_title_hint_text">请为犯罪输入一个标题。</string>
+    <string name="crime_title_label_text">标题</string>
+    <string name="crime_detail_label_text">详情</string>
+    <string name="crime_solved_label_text">已解决</string>
+
+    <string name="crime_list_title">犯罪列表</string>
+    <string name="title_activity_crime_pager">CrimePagerActivity</string>
+    <string name="date_picker_fragment_title">犯罪日期：</string>
+    <string name="time_picker_fragment_title">犯罪时间：</string>
+
+    <string name="new_crime_text">新增犯罪</string>
+    <string name="delete_crime_text">删除</string>
+    <string name="show_subtitle">显示子标题</string>
+    <string name="hide_subtitle">隐藏子标题</string>
+    <string name="subtitle_text">看见什么，就说什么。</string>
+
+    <string name="crime_camera_take_pic_text">Take!</string>
+    <string name="title_activity_crime_camera">CrimeCameraActivity</string>
+    <string name="crime_camera_delete_text">删除照片</string>
+    <string name="crime_camera_system_text">系统相机</string>
+    <string name="crime_camera_customer_text">自定义相机</string>
+    <string name="switch_cam">切换摄像头</string>
+    <string name="camera_alert">设备只有一个摄像头</string>
+    <string name="title_activity_camera_demo">官方摄像头Demo</string>
+</resources>
