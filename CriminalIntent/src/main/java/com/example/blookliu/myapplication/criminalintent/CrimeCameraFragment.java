@@ -313,7 +313,7 @@ public class CrimeCameraFragment extends Fragment implements PreviewView.IPrevie
                 if (parameters.getFocusMode().equals(Camera.Parameters.FOCUS_MODE_AUTO) || parameters.getFocusMode().equals(Camera.Parameters.FOCUS_MODE_MACRO)) {
                     mCamera.autoFocus(null);
                 }
-                mCamera.cancelAutoFocus();
+//                mCamera.cancelAutoFocus();
             }
 
             @Override

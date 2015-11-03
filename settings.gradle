@@ -1,1 +1,1 @@
-include ':app', ':GeoQuiz', ':CriminalIntent', ':HelloMoon'
+include ':app', ':GeoQuiz', ':CriminalIntent', ':HelloMoon', ':camera2Demo'
