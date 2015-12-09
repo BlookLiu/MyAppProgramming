@@ -1,1 +1,1 @@
-include ':app', ':GeoQuiz', ':CriminalIntent', ':HelloMoon', ':camera2Demo'
+include ':app', ':GeoQuiz', ':CriminalIntent', ':HelloMoon', ':camera2Demo', ':DragAndDraw', ':RemoteControl', ':photogallery', ':NerdLauncher'
