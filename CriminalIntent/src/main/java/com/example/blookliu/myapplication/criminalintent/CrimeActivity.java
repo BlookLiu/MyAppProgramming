@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.blookliu.myapplication.criminalintent.model.Crime;
+
 import java.util.UUID;
 
 public class CrimeActivity extends SingleFragmentActivity implements CrimeFragment.OnFragmentInteractionListener{
@@ -35,5 +37,10 @@ public class CrimeActivity extends SingleFragmentActivity implements CrimeFragme
     @Override
     public void updateTitle(CharSequence title) {
         setTitle(title);
+    }
+
+    @Override
+    public void onCrimeUpdate(Crime crime) {
+
     }
 }

@@ -27,4 +27,15 @@
     <string name="switch_cam">切换摄像头</string>
     <string name="camera_alert">设备只有一个摄像头</string>
     <string name="title_activity_camera_demo">官方摄像头Demo</string>
+
+    <string name="crime_suspect_text">选择嫌疑人</string>
+    <string name="crime_report_text">发送陋习报告</string>
+    <string name="crime_report_template">%1$s! 这次犯罪发生在%2$s. %3$s，和 %4$s</string>
+    <string name="crime_report_solved">这次案件已经解决</string>
+    <string name="crime_report_unsolved">这次案件没有解决</string>
+    <string name="crime_report_no_suspect">没有嫌疑人</string>
+    <string name="crime_report_suspect">嫌疑人是%s。</string>
+    <string name="crime_report_subject">犯罪意图报告</string>
+    <string name="send_report">发送犯罪报告</string>
+    <string name="crime_dial_suspect">拨打电话：%s</string>
 </resources>

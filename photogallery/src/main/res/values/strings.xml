@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Photo Gallery</string>
+    <string name="search">搜索</string>
+    <string name="search_hint">搜索 Flickr</string>
+    <string name="search_clear">清空搜索</string>
+    <string name="start_polling">开始获取新图片</string>
+    <string name="stop_polling">停止获取</string>
+    <string name="new_pictures_title">新的相册照片</string>
+    <string name="new_pictures_text">你的相册中有新的照片。</string>
+    <string name="title_activity_photo_page">PhotoPageActivity</string>
+    <string name="action_settings">Settings</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Remote Control</string>
+    <string name="fragment_remote_control_zero_text">0</string>
+    <string name="fragment_remote_control_one_text">1</string>
+    <string name="fragment_remote_control_enter_text">Enter</string>
+    <string name="fragment_remote_control_delete_text">Delete</string>
+</resources>

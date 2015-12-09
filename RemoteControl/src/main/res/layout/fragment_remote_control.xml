@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    android:id="@+id/fragment_remote_control_tl"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/remote_background"
+    android:stretchColumns="*">
+
+    <TextView
+        android:id="@+id/remote_control_selected_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/window_patch"
+        android:gravity="center"
+        android:text="@string/fragment_remote_control_zero_text"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/fragment_remote_control_selected_text_size"/>
+
+    <TextView
+        android:id="@+id/remote_control_working_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/bar_patch"
+        android:gravity="center"
+        android:text="@string/fragment_remote_control_zero_text"
+        android:textSize="@dimen/fragment_remote_control_working_text_size"
+        android:textStyle="italic"/>
+
+    <include
+        layout="@layout/remote_btn_row"
+        android:layout_weight="1"/>
+
+    <include
+        layout="@layout/remote_btn_row"
+        android:layout_weight="1"/>
+
+    <include
+        layout="@layout/remote_btn_row"
+        android:layout_weight="1"/>
+
+    <include
+        layout="@layout/remote_btn_row"
+        android:layout_weight="1"/>
+</TableLayout>

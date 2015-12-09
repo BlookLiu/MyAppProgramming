@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:calendarViewShown="false">
     </DatePicker>
+
     <TimePicker
         android:id="@+id/crime_time_tp"
         xmlns:android="http://schemas.android.com/apk/res/android"

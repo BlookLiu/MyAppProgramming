@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * Created by BlookLiu on 2015/10/7.
+ * 异步prepare会出现未知问题
  */
 public class AudioPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
     private static final String TAG = "AudioPlayer";
@@ -54,11 +55,12 @@ public class AudioPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
         }
     }
 
-    public void restart(){
-        if(mMediaPlayer != null){
+    public void restart() {
+        if (mMediaPlayer != null) {
             mMediaPlayer.start();
         }
     }
+
     public boolean isPlaying() {
         if (mMediaPlayer != null) {
             return mMediaPlayer.isPlaying();
@@ -66,11 +68,12 @@ public class AudioPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
         return false;
     }
 
-    public void reset(){
-        if(mMediaPlayer != null){
+    public void reset() {
+        if (mMediaPlayer != null) {
             mMediaPlayer.reset();
         }
     }
+
     private MediaPlayer asyncCreate(Context context, int resid) {
         try {
             AssetFileDescriptor afd = context.getResources().openRawResourceFd(resid);
@@ -147,6 +150,6 @@ public class AudioPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        mMediaPlayer.stop();
+        stop();
     }
 }

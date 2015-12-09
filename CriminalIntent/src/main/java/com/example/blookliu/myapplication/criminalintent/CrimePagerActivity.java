@@ -116,4 +116,9 @@ public class CrimePagerActivity extends AppCompatActivity implements CrimeFragme
     public void updateTitle(CharSequence title) {
         setTitle(title);
     }
+
+    @Override
+    public void onCrimeUpdate(Crime crime) {
+
+    }
 }

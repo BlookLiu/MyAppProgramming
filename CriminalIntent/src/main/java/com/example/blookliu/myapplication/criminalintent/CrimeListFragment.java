@@ -1,7 +1,9 @@
 package com.example.blookliu.myapplication.criminalintent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -36,6 +38,7 @@ public class CrimeListFragment extends ListFragment {
     private static final String TAG = "CrimeListFragment";
     private static final int REQUEST_CRIME = 0x01;
     private ArrayList<Crime> mCrimes;
+    private OnFragmentInteractionListener mInteractionListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,9 +113,10 @@ public class CrimeListFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         Crime c = (Crime) getListAdapter().getItem(position);
         Log.d(TAG, c + " was clicked");
-        Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+        /*Intent i = new Intent(getActivity(), CrimePagerActivity.class);
         i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
-        startActivityForResult(i, REQUEST_CRIME);
+        startActivityForResult(i, REQUEST_CRIME);*/
+        mInteractionListener.onItemSelected(c);
     }
 
     private class CrimeAdapter extends ArrayAdapter<Crime> {
@@ -173,9 +177,11 @@ public class CrimeListFragment extends ListFragment {
         if (id == R.id.menu_item_new_crime) {
             Crime crime = new Crime();
             CrimeLab.get(getActivity()).addCrime(crime);
-            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+            /*Intent i = new Intent(getActivity(), CrimePagerActivity.class);
             i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
-            startActivityForResult(i, REQUEST_CRIME);
+            startActivityForResult(i, REQUEST_CRIME);*/
+            ((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+            mInteractionListener.onItemSelected(crime);
             return true;
         } else if (id == R.id.menu_item_show_subtitle) {
             ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -210,5 +216,26 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getActivity().getMenuInflater().inflate(R.menu.menu_crime_list_item_context, menu);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mInteractionListener = (OnFragmentInteractionListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mInteractionListener = null;
+    }
+
+    public void updateUI() {
+        ((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+    }
+
+    public interface OnFragmentInteractionListener {
+
+        public void onItemSelected(Crime crime);
     }
 }
