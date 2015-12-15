@@ -1,25 +1,22 @@
 package com.example.blookliu.myapplication.draganddraw.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextPaint;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.AbsSavedState;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.blookliu.myapplication.draganddraw.R;
 import com.example.blookliu.myapplication.draganddraw.model.Box;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * TODO: document your custom view class.
@@ -47,10 +44,19 @@ public class BoxDrawingView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         PointF curr = new PointF(event.getX(), event.getY());
-        Log.v(TAG, String.format("Received event at x=%f, y=%f", curr.x, curr.y));
-        switch (event.getAction()) {
+        int actionIndex = MotionEventCompat.getActionIndex(event);
+        int pointerId = MotionEventCompat.getPointerId(event, actionIndex);
+        int findIndex = MotionEventCompat.findPointerIndex(event, pointerId);
+        Log.v(TAG, String.format("Received event at x=%f, y=%f, action_index: %d, pointer_id: %d, find_index: %d", curr.x, curr.y, actionIndex, pointerId, findIndex));
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 Log.v(TAG, " action down");
+                /**
+                 * 如果所按区域已经有图形则选中，否则就新建
+                 */
+                for (Box b : mBoxes) {
+
+                }
                 mCurrentBox = new Box(curr);
                 mBoxes.add(mCurrentBox);
                 break;
@@ -68,6 +74,13 @@ public class BoxDrawingView extends View {
             case MotionEvent.ACTION_CANCEL:
                 Log.v(TAG, "action cancel");
                 mCurrentBox = null;
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                Log.v(TAG, "pointer down");
+
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                Log.v(TAG, "pointer up!");
                 break;
         }
         return true;
@@ -88,28 +101,53 @@ public class BoxDrawingView extends View {
     @Override
     protected Parcelable onSaveInstanceState() {
         Log.i(TAG, "on save instance state");
-        super.onSaveInstanceState();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(RESTORE_KEY, mBoxes);
-        return bundle;
+        AbsSavedState savedState = (AbsSavedState) super.onSaveInstanceState();
+        ShapeSaveState shapeSaveState = new ShapeSaveState(savedState);
+        shapeSaveState.mBoxes = mBoxes.toArray(new Box[mBoxes.size()]);
+        return shapeSaveState;
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         Log.i(TAG, "on restore instance state");
-        Bundle bundle = (Bundle) state;
-        mBoxes = (ArrayList<Box>) bundle.getSerializable(RESTORE_KEY);
-        invalidate();
+        ShapeSaveState shapeSaveState = (ShapeSaveState) state;
+        super.onRestoreInstanceState(shapeSaveState.getSuperState());
+        mBoxes = new ArrayList<>(Arrays.asList(shapeSaveState.mBoxes));
+
     }
 
-    private class ShapeSaveState extends BaseSavedState {
-
+    @SuppressWarnings("unchecked")
+    private static class ShapeSaveState extends BaseSavedState {
+        Box[] mBoxes;
         public ShapeSaveState(Parcel source) {
             super(source);
+            mBoxes = (Box[]) source.readParcelableArray(Box.class.getClassLoader());
         }
 
         public ShapeSaveState(Parcelable superState) {
             super(superState);
         }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            if (mBoxes != null && mBoxes.length > 0)
+                Log.d(TAG, "write to parcel " + flags);
+            out.writeParcelableArray(mBoxes, flags);
+        }
+
+
+        public static final Parcelable.Creator<ShapeSaveState> CREATOR
+                = new Parcelable.Creator<ShapeSaveState>() {
+
+            public ShapeSaveState createFromParcel(Parcel in) {
+                return new ShapeSaveState(in);
+            }
+
+            public ShapeSaveState[] newArray(int size) {
+                return new ShapeSaveState[size];
+            }
+
+        };
     }
 }
