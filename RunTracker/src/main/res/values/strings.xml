@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RunTracker</string>
+    <string name="started">开始：</string>
+    <string name="latitude">纬度：</string>
+    <string name="longitude">精度：</string>
+    <string name="altitude">高度：</string>
+    <string name="elapsed_time">用时：</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="gps_enabled">gps可用</string>
+    <string name="gps_disabled">gps不可用</string>
+    <string name="cell_text">Run at %1s</string>
+</resources>
