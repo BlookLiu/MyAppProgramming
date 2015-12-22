@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RunActivity"
+            android:name=".RunListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -26,8 +26,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RunActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme">
+        </activity>
+
         <receiver
-            android:name=".receiver.LocationReceiver"
+            android:name=".receiver.TrackingLocationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.example.myapplication.runtracker.ACTION_LOCATION"/>

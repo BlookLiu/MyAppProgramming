@@ -10,4 +10,8 @@
     <string name="gps_enabled">gps可用</string>
     <string name="gps_disabled">gps不可用</string>
     <string name="cell_text">Run at %1s</string>
+    <string name="new_run">新的路程</string>
+    <string name="notify_track_ticker">track ticker</string>
+    <string name="notify_track_content_title">track content title</string>
+    <string name="notify_track_content_text">track content text</string>
 </resources>
