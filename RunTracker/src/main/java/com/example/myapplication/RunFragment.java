@@ -11,7 +11,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,8 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.loader.LastLocationLoader;
+import com.example.myapplication.loader.RunLoader;
 import com.example.myapplication.manager.RunManager;
 import com.example.myapplication.model.Run;
 import com.example.myapplication.receiver.LocationReceiver;
@@ -31,6 +36,8 @@ public class RunFragment extends Fragment {
     private static final String TAG = "RunFragment";
     private static final String ARG_RUN_ID = "RUN_ID";
     private static final int NOTIFY_TRACKING_ID = "notify_tracking_id".hashCode();
+    private static final int LOADER_RUN = "loader_run".hashCode();
+    private static final int LOADER_LOCATION = "loader_location".hashCode();
 
     private Button mStartBtn, mStopBtn;
     private TextView mStartedTv, mLatitudeTv, mLongitudeTv, mAltitudeTv, mDurationTv;
@@ -97,8 +104,11 @@ public class RunFragment extends Fragment {
         if (args != null) {
             long runId = args.getLong(ARG_RUN_ID, -1);
             if (runId != -1) {
-                mRun = mRunManager.getRun(runId);
-                mLastLocation = mRunManager.getLastLocationForRun(runId);
+//                mRun = mRunManager.getRun(runId);
+//                mLastLocation = mRunManager.getLastLocationForRun(runId);
+                LoaderManager loaderManager = getLoaderManager();
+                loaderManager.initLoader(LOADER_RUN, args, new RunLoaderCallbacks());
+                loaderManager.initLoader(LOADER_LOCATION, args, new LocationLoaderCallbacks());
             }
         }
     }
@@ -177,5 +187,44 @@ public class RunFragment extends Fragment {
         mDurationTv.setText(String.valueOf(durationSeconds));
         mStartBtn.setEnabled(!started);
         mStopBtn.setEnabled(started && trackingThisRun);
+    }
+
+    private class RunLoaderCallbacks implements LoaderManager.LoaderCallbacks<Run> {
+
+        @Override
+        public Loader<Run> onCreateLoader(int id, Bundle args) {
+            return new RunLoader(getActivity(), args.getLong(ARG_RUN_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Run> loader, Run data) {
+            Log.d("RunLoaderCallbacks", "loader finish: " + data.toString());
+            mRun = data;
+            updateUI();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Run> loader) {
+            Log.d("RunLoaderCallbacks", "loader reset");
+        }
+    }
+
+    private class LocationLoaderCallbacks implements LoaderManager.LoaderCallbacks<Location> {
+        @Override
+        public Loader<Location> onCreateLoader(int id, Bundle args) {
+            return new LastLocationLoader(getActivity(), args.getLong(ARG_RUN_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Location> loader, Location data) {
+            Log.d("LocationLoaderCallbacks", "loader finish: " + data.toString());
+            mLastLocation = data;
+            updateUI();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Location> loader) {
+            Log.d("LocationLoaderCallbacks", "loader reset");
+        }
     }
 }

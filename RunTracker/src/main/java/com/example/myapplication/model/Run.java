@@ -40,4 +40,12 @@ public class Run {
         int h = (durationSeconds - (m * 60) - s) / 3600;
         return String.format("%02d:%02d:%02d", h, m, s);
     }
+
+    @Override
+    public String toString() {
+        return "Run{" +
+                "mId=" + mId +
+                ", mStartDate=" + mStartDate +
+                '}';
+    }
 }
