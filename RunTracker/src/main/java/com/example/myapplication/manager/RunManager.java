@@ -23,7 +23,7 @@ public class RunManager {
     private static final String TEST_PROVIDER = "TEST_PROVIDER";
     public static final String ACTION_LOCATION = "com.example.myapplication.runtracker" +
             ".ACTION_LOCATION";
-    public static final int REQ_CHECK_LOCATION_PERMISSION = "check_location_permission".hashCode();
+    public static final int REQ_CHECK_LOCATION_PERMISSION = 0x01;
     private static final String PREFS_FILE = "runs";
     private static final String PREF_CURRENT_RUN_ID = "RunManager.currentRunId";
     private static RunManager sRunManager;
@@ -165,6 +165,10 @@ public class RunManager {
         }
         locationCursor.close();
         return location;
+    }
+
+    public RunDatabaseHelper.LocationCursor queryLocationsForRun(long runId) {
+        return mHelper.queryLocationsForRun(runId);
     }
 
     public long getCurrentId() {

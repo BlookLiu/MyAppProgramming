@@ -39,7 +39,7 @@ public class RunFragment extends Fragment {
     private static final int LOADER_RUN = "loader_run".hashCode();
     private static final int LOADER_LOCATION = "loader_location".hashCode();
 
-    private Button mStartBtn, mStopBtn;
+    private Button mStartBtn, mStopBtn, mMapBtn;
     private TextView mStartedTv, mLatitudeTv, mLongitudeTv, mAltitudeTv, mDurationTv;
     private RunManager mRunManager;
     private Location mLastLocation;
@@ -124,6 +124,7 @@ public class RunFragment extends Fragment {
         mDurationTv = (TextView) v.findViewById(R.id.elapsed_tv);
         mStartBtn = (Button) v.findViewById(R.id.start_btn);
         mStopBtn = (Button) v.findViewById(R.id.stop_btn);
+        mMapBtn = (Button) v.findViewById(R.id.map_btn);
 
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +147,14 @@ public class RunFragment extends Fragment {
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(NOTIFY_TRACKING_ID);
 
+            }
+        });
+        mMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), RunMapActivity.class);
+                i.putExtra(RunMapActivity.EXTRA_RUN_ID, mRun.getId());
+                startActivity(i);
             }
         });
         updateUI();
@@ -183,6 +192,9 @@ public class RunFragment extends Fragment {
             mAltitudeTv.setText(Double.toString(mLastLocation.getAltitude()));
             mLatitudeTv.setText(Double.toString(mLastLocation.getLatitude()));
             mLongitudeTv.setText(Double.toString(mLastLocation.getLongitude()));
+            mMapBtn.setEnabled(true);
+        } else {
+            mMapBtn.setEnabled(false);
         }
         mDurationTv.setText(String.valueOf(durationSeconds));
         mStartBtn.setEnabled(!started);
@@ -217,7 +229,8 @@ public class RunFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Location> loader, Location data) {
-            Log.d("LocationLoaderCallbacks", "loader finish: " + data.toString());
+            Log.d("LocationLoaderCallbacks", "loader finish: " + (data == null ? "" : data
+                    .toString()));
             mLastLocation = data;
             updateUI();
         }
