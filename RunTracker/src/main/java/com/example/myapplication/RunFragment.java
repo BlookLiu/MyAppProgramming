@@ -142,7 +142,12 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mRunManager.stopRun();
-                updateUI();
+                getActivity().getWindow().getDecorView().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateUI();
+                    }
+                }, 1000);
                 NotificationManager notificationManager = (NotificationManager) getActivity()
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(NOTIFY_TRACKING_ID);

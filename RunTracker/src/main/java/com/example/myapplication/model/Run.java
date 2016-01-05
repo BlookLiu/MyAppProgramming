@@ -1,5 +1,7 @@
 package com.example.myapplication.model;
 
+import android.util.Log;
+
 import java.util.Date;
 
 /**
@@ -31,6 +33,8 @@ public class Run {
     }
 
     public int getDurationSeconds(long endMillions) {
+        Log.d("Run", String.format("start time: %s, end time: %s", mStartDate.getTime(),
+                endMillions));
         return (int) ((endMillions - mStartDate.getTime()) / 1000);
     }
 
